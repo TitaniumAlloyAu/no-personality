@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="No personality／没有隐私。一张有点自己意见的个人主页。">
+  <title>No personality／没有隐私</title>
+  <link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="birthday.js" defer></script><script src="prison.js" defer></script><script src="soundscape.js" defer></script><script src="crow-art.js" defer></script><link rel="stylesheet" href="crow-art.css"><link rel="stylesheet" href="prison.css"><link rel="stylesheet" href="birthday.css">
+</head>
+<body>
+  <div class="paper" id="page">
+    <header class="masthead"><a class="brand" href="#home">Np<span>®</span></a><span class="edition">PERSONAL WEBSITE · EST. 2026</span><nav><a href="#about">关于我</a><a href="#works">作品</a><button id="theme" aria-pressed="false">◐ 深色模式</button><button id="sound" aria-pressed="false">声音：关</button></nav></header>
+    <main>
+      <section class="hero" id="home"><div class="eyebrow"><span class="red-dot"></span>欢迎来访。随便看看，轻拿轻放。</div><h1>No<br><span class="serif-word">personality</span><span class="title-star">✳</span></h1><div class="hero-bottom"><p class="chinese-title">没有隐私<span>／有点个性</span></p><p class="translator">本站连翻译都有自己的意见。<br><span>Made of drawings, ideas & questionable decisions.</span></p></div><div class="ruler"><span>01 — THE PERSON</span><span>SCROLL TO INVESTIGATE ↓</span></div></section>
+      <section class="about" id="about"><div class="portrait-wrap"><button id="avatar" class="avatar" aria-label="点击个人头像"><img src="assets/avatar.png" alt="戴红蓝头巾、咧嘴笑的个人头像" draggable="false"></button><span class="portrait-caption">图中人物看起来很可靠。</span><div class="avatar-hole" aria-hidden="true">此人暂时不在</div></div><div class="bio"><span class="section-no">ABOUT THE OWNER</span><h2 class="about-heading"><span>关于</span><button id="me" aria-label="会躲开鼠标的我">我</button><span id="umbrella" aria-hidden="true">☂</span></h2><p class="intro">画点东西，写点代码。<br>偶尔让它们做出一些奇怪的事。</p><p class="small-copy">这里存放一些画、一些想法，以及一个暂时看起来正常的个人网站。</p><div class="tags"><span>计算机科学</span><span>原创绘画</span><span>网页实验</span></div><div class="lock-panel" id="lockPanel" hidden><div class="lock-top"><span class="lock-icon">▣</span><div><strong>不知道从哪掉出来的锁</strong><small id="lockHint">一般来说，荧光字会在其他模式下出现。</small></div></div><div class="dials" aria-label="三位密码"><button class="dial" aria-label="第一位密码">0</button><button class="dial" aria-label="第二位密码">0</button><button class="dial" aria-label="第三位密码">0</button><button id="unlock" class="unlock">开锁 ↗</button></div></div></div></section>
+      <section class="work-section" id="works"><div class="section-heading"><div><span class="section-no">02 — SELECTED WORKS</span><h2>一些严肃的作品<span>（真的）</span></h2></div><span class="work-count">02 件 / 持续发生中</span></div><p class="gallery-intro">两张作品，展开看看。画面可以点击放大，人物的认真程度不随页面缩放改变。</p><div class="works-grid"><button class="work-card" data-art="fish"><div class="art-frame"><img src="assets/fish-heroes.png" alt="红蓝两位肌肉鱼侠，水下休闲场景" loading="lazy"><span class="art-open">查看原作 ↗</span></div><div class="art-caption"><div><h3>焯鱼侠、淖鱼侠</h3><p>休闲 / 原创角色绘画</p><div class="work-description"><span>关于这张画</span><p>红与蓝，两位鱼侠。水下背景里，夸张的手臂和鱼的身体组成了一场很认真的休闲活动。</p><p>眼睛、嘴和肌肉都相当投入。至于它们究竟在休闲什么，画面暂未解释。</p><small>点击画面查看完整作品 ↗</small></div></div><span>01</span></div></button><button class="work-card" data-art="potato"><div class="art-frame potato"><img src="assets/potato-hero.png" alt="穿紫色外套、向前挥拳的土豆侠" loading="lazy"><span class="art-open">查看原作 ↗</span></div><div class="art-caption"><div><h3>土豆侠</h3><p>战斗 2 / 原创角色绘画</p><div class="work-description"><span>关于这张画</span><p>紫色外套、胸前的 P，还有迎面而来的拳头。速度线把视线推向人物，衣摆继续向后飞。</p><p>土豆侠正处于战斗状态。请与展示画面保持适当距离。</p><small>点击画面查看完整作品 ↗</small></div></div><span>02</span></div></button></div></section>
+      <section class="discovery-section" id="discoveries" aria-label="发现的机关"></section>
+    </main>
+    <footer><div><span class="footer-logo">No personality.</span><p>没有隐私。保留所有胡来的权利。</p></div><button id="backTop">返回顶部 ↑</button><div class="footer-bottom"><span>© 2026 · An independent personal experiment</span><button id="reset">重新摆好页面</button></div></footer>
+  </div>
+  <button class="crow" id="crow" aria-label="旁观的乌鸦"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M23 64 5 77 37 74Q70 91 87 59Q102 49 96 33L115 30 96 24Q85 1 66 17Q49 24 48 46Z" fill="currentColor"/><path d="M39 61q16-26 38-14Q67 72 39 61" fill="#383a43"/><circle cx="84" cy="26" r="3" fill="#f8e7b0"/><path d="m55 76-4 12m22-14 5 13m-34 0h16m12 0h15" stroke="currentColor" stroke-width="3"/></svg><span class="crow-eye"></span></button>
+  <div class="crow-bubble" id="crowBubble" hidden></div>
+  <div id="secret" class="secret"><span>火柴的温度似乎有用。</span><strong id="secretDigits"></strong></div><div class="darkness" id="darkness" hidden></div><div class="match" id="match" hidden>🔥<span></span></div>
+  <button id="trash" class="trash" aria-label="踢一下垃圾桶"><span class="trash-lid"></span><span class="trash-body">♻</span></button><span id="recycler" class="recycler" hidden>♻</span>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden><span class="toast-star">✦</span><div><small>ACHIEVEMENT UNLOCKED</small><strong id="toastTitle"></strong><p id="toastText"></p></div></div>
+  <dialog id="artDialog"><button class="dialog-close" aria-label="关闭作品">关闭 ×</button><img id="fullArt" alt=""><p id="artTitle"></p></dialog>
+  <dialog id="chapterDialog"><span class="section-no">第一道锁 · 已打开</span><h2>原来这里真的能打开。</h2><p>你发现了藏在个人主页里的第一道机关。</p><p class="small-copy">下一阶段将接入主页面掉落与隐藏搜索栏。</p><button class="dialog-close primary">回去继续乱点 ↗</button></dialog>
+  <button class="light-rescue" id="lightRescue" hidden>浅色模式 ◑</button>
+</body>
+</html>

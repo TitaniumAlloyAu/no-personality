@@ -1,0 +1,13 @@
+'use strict';
+// Soft generated accompaniment. All audio follows the existing sound control.
+let musicTimer=null,musicBeat=0,lastCrowVoice=0;
+function musicScene(){if(!party.hidden){if(partyStage==='birthday'&&partyDark&&lit)return 'birthday';return partyStage==='forest'?'forest':'party'}if(!custody.hidden)return 'custody';return 'home'}
+const sceneNotes={home:[261.63,329.63,392,493.88,440,392,329.63,293.66],party:[261.63,329.63,392,440,392,329.63,293.66,329.63],forest:[220,261.63,329.63,392,349.23,329.63,261.63,246.94],custody:[196,246.94,293.66,349.23,329.63,293.66,246.94,220]};
+function ambientNote(freq,duration=1.4){if(!sound)return;try{const ctx=tone.ctx ||=new(window.AudioContext||window.webkitAudioContext)();ctx.resume();const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.012,ctx.currentTime+.08);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+duration);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+duration)}catch{}}
+function musicTick(){if(!sound)return;const scene=musicScene();if(scene==='birthday')return;const notes=sceneNotes[scene];const i=musicBeat++;ambientNote(notes[i%notes.length]);if(i%4===0)ambientNote(notes[i%notes.length]/2,2.1)}
+function syncMusic(){if(sound&&!musicTimer){musicTick();musicTimer=setInterval(musicTick,1050)}else if(!sound&&musicTimer){clearInterval(musicTimer);musicTimer=null}}
+const soundToggleBefore=$('#sound').onclick;$('#sound').onclick=()=>{soundToggleBefore();syncMusic()};
+function crowVoice(){if(!sound||Date.now()-lastCrowVoice<2400)return;lastCrowVoice=Date.now();try{const ctx=tone.ctx ||=new(window.AudioContext||window.webkitAudioContext)();ctx.resume();for(let i=0;i<2;i++){const start=ctx.currentTime+i*.2,o=ctx.createOscillator(),g=ctx.createGain(),filter=ctx.createBiquadFilter();o.type='sawtooth';o.frequency.setValueAtTime(370+i*25,start);o.frequency.exponentialRampToValueAtTime(165,start+.13);filter.type='lowpass';filter.frequency.value=1000;g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(.018,start+.025);g.gain.exponentialRampToValueAtTime(.0001,start+.16);o.connect(filter);filter.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+.17)}}catch{}}
+const crowSayBefore=crowSay;crowSay=function(text){if(!state.crowBurned||state.crowRevived)crowVoice();crowSayBefore(text)};
+const partySayBefore=partySay;partySay=function(text){if(partyCrow&&text.includes('乌鸦'))crowVoice();partySayBefore(text)};
+const custodySayBefore=custodySay;custodySay=function(text){if(prisonCrowAlive()&&text.includes('乌鸦'))crowVoice();custodySayBefore(text)};
