@@ -32,3 +32,10 @@
   background: #283e86;
   color: #fff;
 }
+/* 开锁后，乌鸦留在背面的搜索页面 */
+body.rear-active #crow {
+  visibility: visible;
+  position: fixed;
+  top: 28vh ;
+  z-index: 52;
+}

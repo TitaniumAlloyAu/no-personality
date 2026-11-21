@@ -43,8 +43,34 @@ $('#me').onclick=()=>{crowSay('He is avoiding the subject.／他在回避“关�
 document.querySelectorAll('.dial').forEach(el=>el.onclick=()=>{if(!state.passwordSeen){crowSay('Perhaps another mode.／也许该试试其他模式。');return}el.textContent=(Number(el.textContent)+1)%10;tone(300,.035)});
 $('#unlock').onclick=()=>{const value=[...document.querySelectorAll('.dial')].map(el=>el.textContent).join('');if(!state.passwordSeen||value!==state.code){$('#lockPanel').classList.remove('shake');void $('#lockPanel').offsetWidth;$('#lockPanel').classList.add('shake');$('#lockHint').textContent=state.passwordSeen?'锁轻轻弹回。再想想那三个数字。':'一般来说，荧光字会在其他模式下出现。';tone(90,.15);return}$('#lockHint').textContent='咔哒。第一道锁打开了。';if(night)toggleNight();achievement('lock','门户初开','你打开了第一道不请自来的锁。');revealRear()};
 $('#trash').onclick=()=>{if(trashBusy)return;trashBusy=true;const el=$('#trash');el.classList.add('kicked');const recycler=$('#recycler');recycler.hidden=false;recycler.style.top=(document.documentElement.scrollHeight-68)+'px';tone(140,.13);achievement('trash','保持整洁','♻ 正在处理你的处理结果。');crowSay('An intriguing approach to housekeeping.／好新颖的家务方式。');setTimeout(()=>{el.classList.remove('kicked');recycler.hidden=true;trashBusy=false},2800)};
-let crowLast=0,crowCount=0;function moveCrow(){const now=Date.now();if(now-crowLast<1500)return;crowLast=now;crowCount++;$('#crow').style.right=(8+Math.random()*48)+'%';$('#crow').style.top=(scrollY+120+Math.random()*Math.max(innerHeight-280,100))+'px';if(crowCount%3===0){$('#crow').style.transform='translateX(120vw) rotate(-15deg)';setTimeout(()=>{$('#crow').style.transform='none';crowSay('I see nothing has improved.／看来情况毫无改善。')},2600)}}
-$('#crow').onpointermove=e=>{if(night)return;if(Math.hypot(e.movementX,e.movementY)>7)moveCrow()};$('#crow').onclick=()=>{crowSay(night?'The writing. Over there.／字，在那边。':'How terribly civilised.／真有教养啊。');if(!night)moveCrow()};
+let crowLast=0,crowCount=0;function moveCrow(){const now=Date.now();if(now-crowLast<1500)return;crowLast=now;crowCount++;$('#crow').style.right=(8+Math.random()*48)+'%';$('#crow').style.top=((document.body.classList.contains('rear-active') ? 0 : scrollY)+120+Math.random()*Math.max(innerHeight-280,100))+'px';if(crowCount%3===0){$('#crow').style.transform='translateX(120vw) rotate(-15deg)';setTimeout(()=>{$('#crow').style.transform='none';crowSay('I see nothing has improved.／看来情况毫无改善。')},2600)}}
+$('#crow').onpointermove=e=>{if(night)return;if(Math.hypot(e.movementX,e.movementY)>7)moveCrow()};$('#crow').onclick = () => {
+  const frontLines = [
+    'A lovely day for questionable decisions.／适合做些奇怪决定的好日子。',
+    'Please do try not to break anything.／请尽量别弄坏东西。',
+    'I was watching that.／我正看着呢。',
+    'Curiosity suits you. Probably.／好奇心很适合你。大概吧。'
+  ];
+
+  const rearLines = [
+    'So, we have found the back.／看来我们找到背面了。',
+    'I expected something more dramatic.／我还以为后面会更壮观些。',
+    'Do be gentle with the search box.／对搜索框温柔一点。',
+    'A key? How delightfully inconvenient.／一把钥匙？真是优雅的不方便。',
+    'I shall supervise from here.／我就在这里负责监督。'
+  ];
+
+  if (night) {
+    crowSay('The writing. Over there.／字，在那边。');
+  } else {
+    const lines = document.body.classList.contains('rear-active')
+      ? rearLines
+      : frontLines;
+
+    crowSay(lines[Math.floor(Math.random() * lines.length)]);
+    moveCrow();
+  }
+};
 const artworks={fish:['assets/fish-heroes.png','焯鱼侠、淖鱼侠（休闲）'],potato:['assets/potato-hero.png','土豆侠（战斗2）']};document.querySelectorAll('[data-art]').forEach(el=>el.onclick=()=>{const [src,title]=artworks[el.dataset.art];$('#fullArt').src=src;$('#fullArt').alt=title;$('#artTitle').textContent=title;$('#artDialog').showModal()});document.querySelectorAll('.dialog-close').forEach(el=>el.onclick=()=>el.closest('dialog').close());document.querySelectorAll('dialog').forEach(el=>el.addEventListener('click',e=>{if(e.target===el){const r=el.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)el.close()}}));
 $('#backTop').onclick=()=>{scrollTo({top:0,behavior:reduced?'instant':'smooth'})};
 $('#reset').onclick=()=>{if(confirm('把页面重新摆好，并清除这一版的探索进度？')){try{localStorage.removeItem(storageKey)}catch{}location.reload()}};
